@@ -9,7 +9,11 @@ import (
 	"fmt"
 
 	// KhanhTNG - Should be consider again.
-	ledgerapi "github.com/hyperledger/fabric-samples/commercial-paper/organization/digibank/contract-go/ledger-api"
+	ledgerapi "ledgerapi"
+
+	// KhanhTNG - For time/date lib
+	"fmt"
+	"time"
 )
 
 // State enum for Customer Order state property
@@ -103,7 +107,7 @@ type CustomerOrder struct {
 	OrderItems 			[]CustomerOrderItems
 }
 
-// KhanhTNG - UnmarshalJSON special handler for managing JSON marshalling
+// KhanhTNG - UnmarshalJSON special handler for managing JSON marshalling - Unmarshall to convert from byte to jcp.
 func (cp *CustomerOrder) UnmarshalJSON(data []byte) error {
 	jcp := jsonCustomerOrder{customerOrderAlias: (*customerOrderAlias)(cp)}
 
@@ -114,11 +118,15 @@ func (cp *CustomerOrder) UnmarshalJSON(data []byte) error {
 	}
 
 	cp.state = jcp.State
+	// Added for party number
+	cp.CustomerNumber = jcp.CustomerNumber 
+	cp.RetailerNumber = jcp.RetailerNumber
+	cp.ShippingNumber = jcp.ShippingNumber
 
 	return nil
 }
 
-// KhanhTNG - MarshalJSON special handler for managing JSON marshalling
+// KhanhTNG - MarshalJSON special handler for managing JSON marshalling - Return from jcp
 func (cp CustomerOrder) MarshalJSON() ([]byte, error) {
 	jcp := jsonCustomerOrder{customerOrderAlias: (*customerOrderAlias)(&cp), State: cp.state, Class: "org.shouldbeconsider", Key: ledgerapi.MakeKey(cp.OrderNumber)}
 
@@ -133,31 +141,49 @@ func (cp *CustomerOrder) GetState() State {
 // KhanhTNG - SetCreated returns the state to issued
 func (cp *CustomerOrder) SetCreated() {
 	cp.state = CREATED
+	// Add some new value
+	//cp.Owner = ''
+	cp.CreatedDate = time.Now()
 }
 
 // KhanhTNG - SetReceived returns the state to issued
 func (cp *CustomerOrder) SetReceived() {
 	cp.state = RECEIVED
+	// Add some new value
+	//cp.Owner = ''
+	cp.ReceivedDate = time.Now()
 }
 
 // KhanhTNG - SetDelToShip returns the state to issued
 func (cp *CustomerOrder) SetDelToShip() {
 	cp.state = DELTOSHIP
+	// Add some new value
+	//cp.Owner = ''
+	cp.ToShippingDate = time.Now()
 }
 
 // KhanhTNG - SetInstock returns the state to issued
 func (cp *CustomerOrder) SetInstock() {
 	cp.state = INSTOCK
+	// Add some new value
+	//cp.Owner = ''
+	cp.InStockDate = time.Now()
 }
 
 // KhanhTNG - SetDelivering returns the state to issued
 func (cp *CustomerOrder) SetDelivering() {
 	cp.state = DELIVERING
+	// Add some new value
+	//cp.Owner = ''
+	cp.InDeliveryDate = time.Now()
 }
 
 // KhanhTNG - SetCompleted returns the state to issued
 func (cp *CustomerOrder) SetCompleted() {
 	cp.state = COMPLETED
+	// Add some new value
+	//cp.Owner = ''
+	cp.CompletedDate = time.Now()
 }
 
 // KhanhTNG - IsIssued returns true if state is issued

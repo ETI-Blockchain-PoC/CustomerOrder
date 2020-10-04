@@ -1,0 +1,143 @@
+---
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "Swagger Petstore"
+host: "localhost:8080"
+basePath: "/docs"
+schemes:
+- "https"
+- "http"
+paths:
+  /customer:
+    post:
+      summary: "Add a new customer order"
+      description: ""
+      operationId: "addCustomerOrder"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Customer order object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/CustomerOrder"
+      responses:
+        201:
+          description: Created
+        "405":
+          description: "Invalid input"
+      x-swagger-router-controller: "CustomerOrder"
+definitions:
+  OrderItem:
+    type: "object"
+    properties:
+      ProductNumber:
+        type: "string"
+      ProductName:
+        type: "string"
+      RetailerNumber:
+        type: "string"
+      RetailerName:
+        type: "string"
+      ShippingNumber:
+        type: "string"
+      ShippingName:
+        type: "string"
+      ShippingCondition:
+        type: "string"
+      ShippingCost:
+        type: "string"
+      ProductQuantity:
+        type: "string"
+      ProductPrice:
+        type: "string"
+      ProductAmount:
+        type: "string"
+    xml:
+      name: "OrderItem"
+    example:
+      ShippingName: "ShippingName"
+      RetailerNumber: "RetailerNumber"
+      RetailerName: "RetailerName"
+      ProductName: "ProductName"
+      ShippingNumber: "ShippingNumber"
+      ProductNumber: "ProductNumber"
+  CustomerOrder:
+    type: "object"
+    properties:
+      OrderNumber:
+        type: "string"
+      CustomerNumber:
+        type: "string"
+      RetailerNumber:
+        type: "string"
+      ShippingNumber:
+        type: "string"
+      CreatedDate:
+        type: "string"
+      ReceivedDate:
+        type: "string"
+      ToShippingDate:
+        type: "string"
+      InStockDate:
+        type: "string"
+      InDeliveryDate:
+        type: "string"
+      CompletedDate:
+        type: "string"
+      Owner:
+        type: "string"
+      DeliveryAddress:
+        type: "string"
+      PaymentMethod:
+        type: "string"
+      Currency:
+        type: "string"
+      TotalOrderAmount:
+        type: "string"
+      TotalShippingCost:
+        type: "string"
+      TotalDiscountAmount:
+        type: "string"
+      TotalPaidAmount:
+        type: "string"
+      OrderItems:
+        type: "array"
+        xml:
+          name: "OrderItem"
+          wrapped: true
+        items:
+          $ref: "#/definitions/OrderItem"
+    xml:
+      name: "CustomerOrder"
+    example:
+      RetailerNumber: "RetailerNumber"
+      ReceivedDate: "ReceivedDate"
+      OrderItems:
+      - ShippingName: "ShippingName"
+        RetailerNumber: "RetailerNumber"
+        RetailerName: "RetailerName"
+        ProductName: "ProductName"
+        ShippingNumber: "ShippingNumber"
+        ProductNumber: "ProductNumber"
+      - ShippingName: "ShippingName"
+        RetailerNumber: "RetailerNumber"
+        RetailerName: "RetailerName"
+        ProductName: "ProductName"
+        ShippingNumber: "ShippingNumber"
+        ProductNumber: "ProductNumber"
+      CustomerNumber: "CustomerNumber"
+      ShippingNumber: "ShippingNumber"
+      CreatedDate: "CreatedDate"
+      OrderNumber: "OrderNumber"
+      ToShippingDate: "ToShippingDate"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

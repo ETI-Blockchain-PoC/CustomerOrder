@@ -7,8 +7,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/hyperledger/fabric-contract-api-go/contractapi"
-	"customer-order"
+	"contractapi"
+	"customerorder"
 )
 
 func main() {

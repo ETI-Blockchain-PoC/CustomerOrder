@@ -5,7 +5,7 @@
 package customerorder
 
 import (
-	"github.com/hyperledger/fabric-contract-api-go/contractapi"
+	"contractapi"
 )
 
 // TransactionContextInterface an interface to
