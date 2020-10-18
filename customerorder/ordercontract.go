@@ -7,7 +7,7 @@ package customerorder
 import (
 	"fmt"
 
-	"contractapi"
+	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
 
 // Contract chaincode that defines

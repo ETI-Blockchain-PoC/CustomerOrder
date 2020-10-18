@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"contractapi"
+	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 	"customerorder"
 )
 
